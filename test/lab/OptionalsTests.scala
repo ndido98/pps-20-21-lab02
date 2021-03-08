@@ -40,4 +40,11 @@ class OptionalsTests {
         assertEquals(None(), filter(s3, (_: Int) > 0))
         assertEquals(None(), filter(s1, (_: Int) > 1))
     }
+
+    @Test
+    def testMap() = {
+        assertEquals(Some(true), map(s1, (_: Int) > 0))
+        assertEquals(Some(4), map(s2, (n: Int) => n * 2))
+        assertEquals(None(), map(s3, (n: Int) => n - 1))
+    }
 }

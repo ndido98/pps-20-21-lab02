@@ -28,5 +28,10 @@ object Optionals {
             case Some(a) if predicate(a) => opt
             case _ => None()
         }
+
+        def map[A, B](opt: Option[A], mapper: A => B): Option[B] = opt match {
+            case Some(a) => Some(mapper(a))
+            case None() => None()
+        }
     }
 }
