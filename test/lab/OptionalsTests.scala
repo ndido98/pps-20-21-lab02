@@ -28,8 +28,16 @@ class OptionalsTests {
 
     @Test
     def testFlatMap() = {
-        val mapped = flatMap(s1)(i => Some(i + 1))
-        assertFalse(isEmpty(mapped))
-        assertEquals(2, getOrElse(mapped, 0))
+        assertEquals(Some(2), (flatMap(s1)(i => Some(i + 1))))
+        assertEquals(Some(3), flatMap(s1)(i => flatMap(s2)(j => Some(i + j))))
+        assertEquals(None(), flatMap(s1)(i => flatMap(s3)(j => Some(i + j))))
+    }
+
+    @Test
+    def testFilter() = {
+        assertEquals(s1, filter(s1, (_: Int) > 0))
+        assertEquals(s2, filter(s2, (_: Int) > 1))
+        assertEquals(None(), filter(s3, (_: Int) > 0))
+        assertEquals(None(), filter(s1, (_: Int) > 1))
     }
 }

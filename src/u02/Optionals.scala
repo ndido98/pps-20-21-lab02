@@ -23,5 +23,10 @@ object Optionals {
             case Some(a) => f(a)
             case _ => None()
         }
+
+        def filter[A](opt: Option[A], predicate: A => Boolean): Option[A] = opt match {
+            case Some(a) if predicate(a) => opt
+            case _ => None()
+        }
     }
 }
