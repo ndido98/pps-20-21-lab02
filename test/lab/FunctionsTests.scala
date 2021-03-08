@@ -37,6 +37,26 @@ class FunctionsTests {
         assertFalse(nonZero(0))
     }
 
+    @Test
+    def testBetweenValWithCurrying() = {
+        testBetweenWithCurrying(p1)
+    }
+
+    @Test
+    def testBetweenDefWithCurrying() = {
+        testBetweenWithCurrying(p3)
+    }
+
+    @Test
+    def testBetweenValWithoutCurrying() = {
+        testBetweenWithoutCurrying(p2)
+    }
+
+    @Test
+    def testBetweenDefWithoutCurrying() = {
+        testBetweenWithoutCurrying(p4)
+    }
+
     def testParity(parity: Int => String) = {
         assertEquals("odd", parity(5))
         assertEquals("even", parity(10))
@@ -51,5 +71,23 @@ class FunctionsTests {
         assertFalse(empty("test"))
         assertTrue(notEmpty("test"))
         assertFalse(notEmpty(""))
+    }
+
+    def testBetweenWithCurrying(f: Int => Int => Int => Boolean) = {
+        assertTrue(f(1)(2)(3))
+        assertFalse(f(1)(3)(2))
+        assertFalse(f(2)(1)(3))
+        assertFalse(f(2)(3)(1))
+        assertFalse(f(3)(1)(2))
+        assertFalse(f(3)(2)(1))
+    }
+
+    def testBetweenWithoutCurrying(f: (Int, Int, Int) => Boolean) = {
+        assertTrue(f(1, 2, 3))
+        assertFalse(f(1, 3, 2))
+        assertFalse(f(2, 1, 3))
+        assertFalse(f(2, 3, 1))
+        assertFalse(f(3, 1, 2))
+        assertFalse(f(3, 2, 1))
     }
 }
