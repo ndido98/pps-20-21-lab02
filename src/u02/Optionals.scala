@@ -1,6 +1,6 @@
 package u02
 
-object Optionals extends App {
+object Optionals {
 
     sealed trait Option[A] // An Optional data type
     object Option {
@@ -24,16 +24,4 @@ object Optionals extends App {
             case _ => None()
         }
     }
-
-    import Option._
-
-    val s1: Option[Int] = Some(1)
-    val s2: Option[Int] = Some(2)
-    val s3: Option[Int] = None()
-
-    println(s1) // Some(1)
-    println(getOrElse(s1, 0), getOrElse(s3, 0)) // 1,0
-    println(flatMap(s1)(i => Some(i + 1))) // Some(2)
-    println(flatMap(s1)(i => flatMap(s2)(j => Some(i + j)))) // Some(3)
-    println(flatMap(s1)(i => flatMap(s3)(j => Some(i + j)))) // None
 }
