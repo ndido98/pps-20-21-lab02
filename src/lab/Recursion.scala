@@ -1,11 +1,15 @@
 package lab
 
+import scala.annotation.tailrec
+
 object Recursion {
 
-    // Not tail-recursive, if we added @tailrec the compiler would throw an error
-    def fibonacci(n: Int): Int = n match {
-        case 0 => 0
-        case 1 => 1
-        case n => fibonacci(n - 1) + fibonacci(n - 2)
+    def fibonacci(n: Int): Int = {
+        @tailrec
+        def _inner(n: Int, a: Int, b: Int): Int = n match {
+            case 0 => a
+            case _ => _inner(n - 1, b, a + b)
+        }
+        _inner(n, 0, 1)
     }
 }
