@@ -14,7 +14,7 @@ class FunctionsTests {
 
     @Test
     def testParityWithDef() = {
-        testParity(parityDef)
+        testParity(parity)
     }
 
     @Test
@@ -24,7 +24,7 @@ class FunctionsTests {
 
     @Test
     def testNegWithDef() = {
-        testNeg(negDef)
+        testNeg(neg)
     }
 
     def testParity(parity: Int => String) = {
