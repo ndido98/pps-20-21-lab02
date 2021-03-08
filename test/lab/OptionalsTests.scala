@@ -47,4 +47,15 @@ class OptionalsTests {
         assertEquals(Some(4), map(s2, (n: Int) => n * 2))
         assertEquals(None(), map(s3, (n: Int) => n - 1))
     }
+
+    @Test
+    def testMap2() = {
+        val sumMapper = (a: Int, b: Int) => a + b
+        val equalsMapper = (a: Int, b: Int) => a == b
+        assertEquals(Some(3), map2(s1, s2, sumMapper))
+        assertEquals(Some(false), map2(s1, s2, equalsMapper))
+        assertEquals(None(), map2(s1, s3, sumMapper))
+        assertEquals(None(), map2(s3, s2, sumMapper))
+        assertEquals(None(), map2(s3, s3, sumMapper))
+    }
 }

@@ -33,5 +33,10 @@ object Optionals {
             case Some(a) => Some(mapper(a))
             case None() => None()
         }
+
+        def map2[A, B, C](optA: Option[A], optB: Option[B], mapper: (A, B) => C): Option[C] = (optA, optB) match {
+            case (Some(a), Some(b)) => Some(mapper(a, b))
+            case _ => None()
+        }
     }
 }
