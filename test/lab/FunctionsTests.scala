@@ -27,6 +27,16 @@ class FunctionsTests {
         testNeg(neg)
     }
 
+    @Test
+    def testGenericNeg() = {
+        val zero = (n: Int) => n == 0
+        val nonZero = neg(zero)
+        assertTrue(zero(0))
+        assertFalse(zero(10))
+        assertTrue(nonZero(10))
+        assertFalse(nonZero(0))
+    }
+
     def testParity(parity: Int => String) = {
         assertEquals("odd", parity(5))
         assertEquals("even", parity(10))

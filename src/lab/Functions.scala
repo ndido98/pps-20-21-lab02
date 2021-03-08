@@ -14,5 +14,5 @@ object Functions {
 
     val negVal: (String => Boolean) => (String => Boolean) = predicate => !predicate(_)
 
-    def neg(predicate: String => Boolean): String => Boolean = !predicate(_)
+    def neg[P](predicate: P => Boolean): P => Boolean = !predicate(_)
 }
