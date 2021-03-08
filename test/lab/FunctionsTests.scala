@@ -57,6 +57,12 @@ class FunctionsTests {
         testBetweenWithoutCurrying(p4)
     }
 
+    @Test
+    def testCompose() = {
+        assertEquals(9, compose((_: Int) - 1, (_: Int) * 2)(5))
+        assertEquals("testgf", compose((_: String) + "f", (_: String) + "g")("test"))
+    }
+
     def testParity(parity: Int => String) = {
         assertEquals("odd", parity(5))
         assertEquals("even", parity(10))
