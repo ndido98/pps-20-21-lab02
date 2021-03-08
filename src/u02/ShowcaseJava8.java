@@ -2,6 +2,7 @@ package u02;
 
 import java.util.*;
 import java.util.stream.*;
+
 import static java.util.stream.Collectors.*;
 
 public class ShowcaseJava8 {
@@ -16,7 +17,7 @@ public class ShowcaseJava8 {
         // declaratively working with streams: note str is an 'infinite' sequence!
         final Random random = new Random();
         final Stream<Integer> str = Stream.generate(() -> random.nextInt(6))
-                                          .map(i -> i + 1);
+                .map(i -> i + 1);
         System.out.println(str.limit(20).collect(toList()));
 
         // simulating large-scale data processing with parallel streams
@@ -25,14 +26,14 @@ public class ShowcaseJava8 {
                 .collect(toList());
         // sequential
         long time = System.currentTimeMillis();
-        System.out.println(l.stream().reduce((a,b)->Math.max(a,b)));
+        System.out.println(l.stream().reduce((a, b) -> Math.max(a, b)));
         time = System.currentTimeMillis() - time;
         System.out.println("Time: " + time);
         // parallel
         long time2 = System.currentTimeMillis();
-        System.out.println(l.stream().parallel().reduce((a,b)->Math.max(a,b)));
+        System.out.println(l.stream().parallel().reduce((a, b) -> Math.max(a, b)));
         time2 = System.currentTimeMillis() - time2;
         System.out.println("Time2: " + time2);
-        System.out.println("Gain: " + (((double)time)/time2));
+        System.out.println("Gain: " + (((double) time) / time2));
     }
 }
