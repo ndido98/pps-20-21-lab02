@@ -28,34 +28,34 @@ class OptionalsTests {
 
     @Test
     def testFlatMap() = {
-        assertEquals(Some(2), (flatMap(s1)(i => Some(i + 1))))
+        assertEquals(Some(2), flatMap(s1)(i => Some(i + 1)))
         assertEquals(Some(3), flatMap(s1)(i => flatMap(s2)(j => Some(i + j))))
         assertEquals(None(), flatMap(s1)(i => flatMap(s3)(j => Some(i + j))))
     }
 
     @Test
     def testFilter() = {
-        assertEquals(s1, filter(s1, (_: Int) > 0))
-        assertEquals(s2, filter(s2, (_: Int) > 1))
-        assertEquals(None(), filter(s3, (_: Int) > 0))
-        assertEquals(None(), filter(s1, (_: Int) > 1))
+        assertEquals(s1, filter(s1)(_ > 0))
+        assertEquals(s2, filter(s2)(_ > 1))
+        assertEquals(None(), filter(s3)(_ > 0))
+        assertEquals(None(), filter(s1)(_ > 1))
     }
 
     @Test
     def testMap() = {
-        assertEquals(Some(true), map(s1, (_: Int) > 0))
-        assertEquals(Some(4), map(s2, (n: Int) => n * 2))
-        assertEquals(None(), map(s3, (n: Int) => n - 1))
+        assertEquals(Some(true), map(s1)(_ > 0))
+        assertEquals(Some(4), map(s2)(_ * 2))
+        assertEquals(None(), map(s3)(_ - 1))
     }
 
     @Test
     def testMap2() = {
         val sumMapper = (a: Int, b: Int) => a + b
         val equalsMapper = (a: Int, b: Int) => a == b
-        assertEquals(Some(3), map2(s1, s2, sumMapper))
-        assertEquals(Some(false), map2(s1, s2, equalsMapper))
-        assertEquals(None(), map2(s1, s3, sumMapper))
-        assertEquals(None(), map2(s3, s2, sumMapper))
-        assertEquals(None(), map2(s3, s3, sumMapper))
+        assertEquals(Some(3), map2(s1, s2)(sumMapper))
+        assertEquals(Some(false), map2(s1, s2)(equalsMapper))
+        assertEquals(None(), map2(s1, s3)(sumMapper))
+        assertEquals(None(), map2(s3, s2)(sumMapper))
+        assertEquals(None(), map2(s3, s3)(sumMapper))
     }
 }

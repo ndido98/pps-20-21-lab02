@@ -24,17 +24,17 @@ object Optionals {
             case _ => None()
         }
 
-        def filter[A](opt: Option[A], predicate: A => Boolean): Option[A] = opt match {
+        def filter[A](opt: Option[A])(predicate: A => Boolean): Option[A] = opt match {
             case Some(a) if predicate(a) => opt
             case _ => None()
         }
 
-        def map[A, B](opt: Option[A], mapper: A => B): Option[B] = opt match {
+        def map[A, B](opt: Option[A])(mapper: A => B): Option[B] = opt match {
             case Some(a) => Some(mapper(a))
             case None() => None()
         }
 
-        def map2[A, B, C](optA: Option[A], optB: Option[B], mapper: (A, B) => C): Option[C] = (optA, optB) match {
+        def map2[A, B, C](optA: Option[A], optB: Option[B])(mapper: (A, B) => C): Option[C] = (optA, optB) match {
             case (Some(a), Some(b)) => Some(mapper(a, b))
             case _ => None()
         }
