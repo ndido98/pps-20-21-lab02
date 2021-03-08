@@ -24,5 +24,5 @@ object Functions {
 
     def p4(x: Int, y: Int, z: Int): Boolean = x <= y && y <= z
 
-    def compose[T](f: T => T, g: T => T): T => T = x => f(g(x))
+    def compose[A, B, C](f: B => C, g: A => B): A => C = x => f(g(x))
 }
