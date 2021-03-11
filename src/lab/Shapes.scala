@@ -11,13 +11,11 @@ object Shapes {
         def perimeter(shape: Shape): Double = shape match {
             case Rectangle(w, h) => 2 * (w + h)
             case Circle(r) => 2 * Pi * r
-            case _ => ???
         }
 
         def area(shape: Shape): Double = shape match {
             case Rectangle(w, h) => w * h
             case Circle(r) => Pi * r * r
-            case _ => ???
         }
     }
 }
