@@ -11,20 +11,21 @@ object BTrees {
 
         case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
 
-        def size[A](t: Tree[A]): Int = t match {
-            case Branch(l, r) => size(l) + size(r)
-            case _ => 1
-        }
+        def size[A](t: Tree[A]): Int =
+            mapReduce(t, (e: A) => 1, (_: Int) + (_: Int))
 
-        def find[A](t: Tree[A], elem: A): Boolean = t match {
-            case Branch(l, r) => find(l, elem) || find(r, elem)
-            case Leaf(e) => e == elem
-        }
+        def find[A](t: Tree[A], elem: A): Boolean =
+            mapReduce(t, (e: A) => e == elem, (_: Boolean) || (_: Boolean))
 
-        def count[A](t: Tree[A], elem: A): Int = t match {
-            case Branch(l, r) => count(l, elem) + count(r, elem)
-            case Leaf(e) if (e == elem) => 1
-            case _ => 0
+        def count[A](t: Tree[A], elem: A): Int =
+            mapReduce(t, (e: A) => if (e == elem) 1 else 0, (_: Int) + (_: Int))
+
+        def mapReduce[A, R](t: Tree[A], mapper: A => R, reduceOperator: (R, R) => R): R = t match {
+            case Branch(l, r) => reduceOperator(
+                mapReduce(l, mapper, reduceOperator),
+                mapReduce(r, mapper, reduceOperator)
+            )
+            case Leaf(e) => mapper(e)
         }
     }
 }
